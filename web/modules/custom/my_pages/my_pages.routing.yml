@@ -1,0 +1,33 @@
+my_page.page:
+  path: '/my-page' 
+  defaults: 
+    _controller: '\Drupal\my_pages\Controller\PageController::content' 
+    _title: 'Test Page'
+  requirements: 
+    _permission: 'access content'
+
+my_page_1.varios:
+  path: '/varios' 
+  defaults: 
+    _controller: '\Drupal\my_pages\Controller\PageController::variosDatos' 
+    _title: 'Impresión varios datos'
+  requirements: 
+    _permission: 'access content'
+
+
+my_page_2.form:
+  path: '/myDateForm' 
+  defaults: 
+    _controller: '\Drupal\my_pages\Controller\PageController::dateForm' 
+    _title: 'Impresión varios datos y formulario'
+  requirements: 
+    _permission: 'access content'
+
+
+my_page.template:
+  path: '/my-page/template' 
+  defaults: 
+    _controller: '\Drupal\my_pages\Controller\PageController::template' 
+    _title: 'Pagina creada con template customizado'
+  requirements: 
+    _permission: 'access content'

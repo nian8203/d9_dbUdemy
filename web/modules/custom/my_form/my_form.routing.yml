@@ -1,0 +1,17 @@
+my_form.form:
+  path: '/my-form'
+  defaults:
+    _title: 'Test Form'
+    _form: '\Drupal\my_form\Form\MyForm'
+  requirements:
+    _permission: 'access content'
+
+
+  
+my_form.mostrartodo:
+  path: '/form-example' 
+  defaults: 
+    _controller: '\Drupal\my_form\Controller\MyFormController::mostrartodo' 
+    _title: 'Datos personales'
+  requirements: 
+    _permission: 'access content'

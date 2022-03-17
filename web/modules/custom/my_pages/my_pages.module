@@ -1,0 +1,19 @@
+<?php
+
+
+/**
+ * Implements hook_theme().
+ */
+function my_pages_theme($existing, $type, $theme, $path) {
+    return [
+      'my_template' => [
+          'variables' => [
+            'titulo' => 'Template Twig!!!',
+            'Descripción' => 'Datos de descripción plantilla hook',
+            'my_variable' => NULL,
+            'form' => NULL,
+        ],        
+      ],
+    ];
+}
+  

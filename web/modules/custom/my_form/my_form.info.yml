@@ -1,0 +1,6 @@
+name: Test Form
+description: Creates a page showing a Form.
+package: Nian
+
+type: module
+core_version_requirement: ^8 || ^9

@@ -1,0 +1,96 @@
+<?php
+
+
+
+function my_form_schema(){
+    $schema['datosPersonales'] = array(
+        'description' => 'Stores module data as key/value pairs per user.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The {users}.uid this record affects.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),     
+            'nombre' => array(
+                'description' => 'The {users}.uid this record affects.',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+            ),     
+            'apellido' => array(
+                'description' => 'The {users}.uid this record affects.',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+            ),     
+            'email' => array(
+                'description' => 'The {users}.uid this record affects.',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+            ),     
+            'celular' => array(
+                'description' => 'The {users}.uid this record affects.',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+            ),     
+            'fecha' => array(
+                'description' => 'The {users}.uid this record affects.',
+                'type' => 'varchar',
+                'length' => 50,
+                'not null' => TRUE,
+                'default' => '',
+            ),     
+                
+        ), 
+        'primary key' => array('id'),  
+    );
+    return $schema;
+};
+
+
+
+function my_form_install(){
+    $values = [
+        [
+            'id' => '',
+            'nombre' => 'alejandro',
+            'apellido' => 'alejandro',
+            'email' => 'alejandro@gmail.com',
+            'celular' => '34567890',
+            'fecha' => '',          
+        ],
+        [
+            'id' => '',
+            'nombre' => 'johan',
+            'apellido' => 'gutierrez',
+            'email' => 'johan@gmail.com',
+            'celular' => '32167890',
+            'fecha' => '', 
+        ],
+        [
+            'id' => '',
+            'nombre' => 'pedro',
+            'apellido' => 'fernandez',
+            'email' => 'pedro@gmail.com',
+            'celular' => '35067890',
+            'fecha' => '', 
+        ],
+      ];
+
+      $database = \Drupal::database();
+      $query = $database->insert('datosPersonales')->fields(['nombre', 'apellido', 'email', 'celular', 'fecha']);
+      foreach ($values as $record) {
+        $query->values($record);
+      }
+      $query->execute();
+
+     
+         
+}
