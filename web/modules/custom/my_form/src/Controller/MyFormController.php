@@ -74,9 +74,27 @@ function listar(){
 
     $rows = [];
 
+    global $base_url;
     foreach ($result as $row) {
+      dpm($row);
 
       $row = (array) $row;
+
+      $url = Url::fromUri($base_url.'/form-example/'.$row['id']);
+      $ver_link = Link::fromTextAndUrl(t('Ver'), $url)->toString();
+      $row['ver'] = $ver_link;
+      $row = (array) $row;
+
+      $url = Url::fromUri($base_url.'/form-example/'.$row['id'].'/edit');
+      $editar_link = Link::fromTextAndUrl(t('Editar'), $url)->toString();
+      $row['editar'] = $editar_link;
+      $row = (array) $row;
+
+      $url = Url::fromUri($base_url.'/form-example/'.$row['id'].'/delete');
+      $eliminar_link = Link::fromTextAndUrl(t('Eliminar'), $url)->toString();
+      $row['eliminar'] = $eliminar_link;
+
+
       $rows[] = $row;     
     }
 

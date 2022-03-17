@@ -15,3 +15,13 @@ my_form.mostrartodo:
     _title: 'Datos personales'
   requirements: 
     _permission: 'access content'
+
+
+
+my_form.editForm:
+  path: '/form-example/{arg}/edit' #arg es el parametro que se pasa en build form
+  defaults:
+    _title: 'Edit Form'
+    _form: '\Drupal\my_form\Form\EditForm'
+  requirements:
+    _permission: 'access content'

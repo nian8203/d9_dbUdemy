@@ -8,19 +8,36 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Implements an example form.
  */
-class MyForm extends FormBase {
+class EditForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'my_form_form';
+    return 'my_form_editForm';
+  }
+
+  public function listarRegistro($arg){
+
+    $database = \Drupal::database();
+    $query = $database->query("SELECT * FROM {datosPersonales} WHERE id = :id", [
+      ':id' => $arg,
+    ]);
+    $result = $query->fetchAssoc();
+
+    return $result;
+
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state, $arg = null) {
+
+    ksm($this->listarRegistro($arg));
+
+    $registro = array();
+    $registro = $this->listarRegistro($arg); //cargar datos en formulario para editar
 
     //creacion de contenedor para insertar los campos descritos abajo
     $form['datos_personales'] = array( 
@@ -36,7 +53,7 @@ class MyForm extends FormBase {
     $form['datos_personales']['nombre'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Digite su nombre'),
-     //'#default_value' => $node->title,
+      '#default_value' => $registro['nombre'],
       '#size' => 60,
       '#maxlength' => 30,
       //'#pattern' => 'some-prefix-[a-z]+',
@@ -46,7 +63,7 @@ class MyForm extends FormBase {
     $form['datos_personales']['apellido'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Digite su apellido'),
-     //'#default_value' => $node->title,
+      '#default_value' => $registro['apellido'],
       '#size' => 60,
       '#maxlength' => 30,
       //'#pattern' => 'some-prefix-[a-z]+',
@@ -56,6 +73,7 @@ class MyForm extends FormBase {
     $form['datos_personales']['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Digite su correo'),
+      '#default_value' => $registro['email'],
       //'#pattern' => '*@example.com',
       '#required' => true,
     ];
@@ -91,6 +109,7 @@ class MyForm extends FormBase {
     $form['datos_institucionales'] ['telefono'] = array(
       '#type' => 'tel',
       '#title' => $this->t('Digite un telefono'),
+      '#default_value' => $registro['celular'],
       //'#pattern' => '[^\\d]*',
       '#required' => true,
     );
@@ -98,7 +117,8 @@ class MyForm extends FormBase {
     $form['datos_institucionales']['expiration'] = [
       '#type' => 'date',
       '#title' => $this->t('Fecha de ingreso'),
-      '#default_value' => '2020-02-05',
+      '#default_value' => $registro['fecha'],
+      //'#default_value' => '2020-02-05',
     ];
 
     // $form['phone_number'] = [
@@ -135,7 +155,7 @@ class MyForm extends FormBase {
       'celular' => $form_state->getValue('telefono'),
       'fecha' => $form_state->getValue('expiration'),
     );
-    //ksm($campos);
+    ksm($campos);
 
 
     $connection = \Drupal::database();
@@ -143,7 +163,7 @@ class MyForm extends FormBase {
     ->fields($campos)
     ->execute();
     
-    \Drupal::messenger()->addStatus(t('Registro agregado con exito!!!'));
+    Drupal::messenger()->addStatus('Registro creado con éxito!!!');
 
     $form_state->setRedirect('my_form.mostrartodo');
 
