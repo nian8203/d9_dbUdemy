@@ -1,0 +1,29 @@
+my_form acceso vista datos personales:
+  title: 'Acceso datos personales'
+  description: 'Permitir el acceso a la vista de los datos personales.'
+  restrict access: true
+
+
+my_form crear registro:
+  title: 'Add registros'
+  description: 'Permitir registro de datos.'
+  restrict access: true
+
+
+my_form editar registro:
+  title: 'Edit registros'
+  description: 'Permitir editar de datos.'
+  restrict access: true
+
+
+my_form eliminar registro:
+  title: 'Delete registros'
+  description: 'Permitir eliminar de datos.'
+  restrict access: true
+
+
+my_form ver registro:
+  title: 'View registros'
+  description: 'Permitir ver de datos.'
+  restrict access: true
+

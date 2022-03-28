@@ -17,7 +17,7 @@ class EditForm extends FormBase {
     return 'my_form_editForm';
   }
 
-  public function listarRegistro($arg){
+  public static function listarRegistro($arg){
 
     $database = \Drupal::database();
     $query = $database->query("SELECT * FROM {datosPersonales} WHERE id = :id", [
@@ -34,7 +34,10 @@ class EditForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, $arg = null) {
 
-    ksm($this->listarRegistro($arg));
+    $form['#attached']['library'][] = 'seven/global-styling'; //add stilos del tema seven 
+
+
+    //ksm($this->listarRegistro($arg));
 
     $registro = array();
     $registro = $this->listarRegistro($arg); //cargar datos en formulario para editar
@@ -121,6 +124,11 @@ class EditForm extends FormBase {
       //'#default_value' => '2020-02-05',
     ];
 
+    $form['idRegistro'] = array(
+      '#type' => 'hidden',
+      '#value' => $arg,
+    );
+
     // $form['phone_number'] = [
     //   '#type' => 'tel',
     //   '#title' => $this->t('Your phone number'),
@@ -157,13 +165,17 @@ class EditForm extends FormBase {
     );
     ksm($campos);
 
+    $id = $form_state->getValue('idRegistro');
+
 
     $connection = \Drupal::database();
-    $result = $connection->insert('datosPersonales')
+    $connection->update('datosPersonales')
     ->fields($campos)
+    ->condition('id', $id)
     ->execute();
+
     
-    Drupal::messenger()->addStatus('Registro creado con éxito!!!');
+    \Drupal::messenger()->addStatus('Datos actualizados con éxito!!!');
 
     $form_state->setRedirect('my_form.mostrartodo');
 

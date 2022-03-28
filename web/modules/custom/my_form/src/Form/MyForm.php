@@ -22,6 +22,8 @@ class MyForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $form['#attached']['library'][] = 'seven/global-styling'; //add stilos del tema seven 
+
     //creacion de contenedor para insertar los campos descritos abajo
     $form['datos_personales'] = array( 
       '#type' => 'fieldset',
