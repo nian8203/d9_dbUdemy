@@ -5,6 +5,7 @@ namespace Drupal\my_form\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\my_form\Form\EditForm;
 
 
 /**
@@ -19,6 +20,45 @@ class MyFormController extends ControllerBase {
    *   Return markup array.
    */
  
+
+  public function mostrarRegistro($arg) {   
+   
+    global $base_url;
+    $dato = array(); 
+    //$row = [];  
+    
+
+    //=======================boton de editar==========================
+
+    $url = Url::fromUri($base_url.'/form-example/'.$arg.'/edit');
+    $editar_link = Link::fromTextAndUrl(t('Editar registro'), $url)->toString();
+    $row['editar'] = $editar_link;
+    $row = (array) $row;
+
+    $dato['d1'] = array(
+      '#markup' => $editar_link.'<br><br>',
+    );
+
+    $dato['d2'] = array(
+      '#markup' => 'Esta información es confidencial.<br><br>',
+  );
+
+   
+    //$datosForm = new EditForm();
+    $reg = array();
+    //$reg = $datosForm->listarRegistro($arg);
+    $reg = EditForm::listarRegistro($arg);
+
+    //ksm($reg);
+
+    $dato[] = [
+      '#theme' => 'my_form_template',
+      '#test_var' => $reg,
+    ];
+
+    return $dato;
+  }
+
 
   public function mostrartodo() {
 
@@ -43,7 +83,7 @@ class MyFormController extends ControllerBase {
 
     $rows = array();
     $rows = listar();
-    ksm(listar());
+    //ksm(listar());
 
     $dato['table'] = [
       '#rows' => $rows,
@@ -76,7 +116,7 @@ function listar(){
 
     global $base_url;
     foreach ($result as $row) {
-      dpm($row);
+      //dpm($row);
 
       $row = (array) $row;
 

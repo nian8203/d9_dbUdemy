@@ -1,0 +1,7 @@
+my_form.links:
+  title: 'My Form'
+  route_name: my_form.mostrartodo
+
+
+
+  # se agrega la ruta de archivo routing a la cual queremos ir

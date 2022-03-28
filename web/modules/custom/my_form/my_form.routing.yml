@@ -4,8 +4,7 @@ my_form.form:
     _title: 'Test Form'
     _form: '\Drupal\my_form\Form\MyForm'
   requirements:
-    _permission: 'access content'
-
+    _permission: 'my_form crear registro'
 
   
 my_form.mostrartodo:
@@ -14,8 +13,7 @@ my_form.mostrartodo:
     _controller: '\Drupal\my_form\Controller\MyFormController::mostrartodo' 
     _title: 'Datos personales'
   requirements: 
-    _permission: 'access content'
-
+    _permission: 'my_form acceso vista datos personales'
 
 
 my_form.editForm:
@@ -24,4 +22,25 @@ my_form.editForm:
     _title: 'Edit Form'
     _form: '\Drupal\my_form\Form\EditForm'
   requirements:
-    _permission: 'access content'
+    _permission: 'my_form editar registro'
+
+
+my_form.deleteForm:
+  path: '/form-example/{arg}/delete' #arg es el parametro que se pasa en build form
+  defaults:
+    _title: 'Desea eliminar este registro?'
+    _form: '\Drupal\my_form\Form\DeleteForm'
+  requirements:
+    _permission: 'my_form eliminar registro'
+
+
+my_form.mostrarRegistro:
+  path: '/form-example/{arg}' 
+  defaults: 
+    _controller: '\Drupal\my_form\Controller\MyFormController::mostrarRegistro' 
+    _title: 'Datos personales'
+  requirements: 
+    _permission: 'my_form ver registro'
+
+
+# los _permission se agregan del archivo my_form permissions
