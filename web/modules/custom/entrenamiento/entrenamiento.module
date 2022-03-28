@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * @file
+ * Contains welcome.module.
+ */
+
+function entrenamiento_user_login() {
+    $config = \Drupal::config('entrenamiento.adminsettings');  
+    drupal_set_message($config->get('entrenamiento_message'));
+}

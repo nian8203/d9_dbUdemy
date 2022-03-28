@@ -1,0 +1,6 @@
+name: Entrenamiento Bits 
+description: Modulo taller bits Backend junior drupal  
+package: Custom
+
+type: module  
+core_version_requirement: ^8 || ^9
