@@ -4,7 +4,8 @@ entrenamiento.admin_settings_form:
     _form: '\Drupal\entrenamiento\Form\Entrenamiento'
     _title: 'Form Entrenamiento Bits'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'entrenamiento form access'
+    # _permission: 'administer site configuration'
 
 # welcome.admin_settings_form:  
 #   path: '/admin/config/welcome/adminsettings'  
